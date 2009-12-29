@@ -1219,7 +1219,7 @@ _equery()
             ;;
             *)
             # Complete on all package names.
-            _pkgname -A $cur
+                _pkgname -A $cur
             ;;
         esac
         fi
