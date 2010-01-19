@@ -112,13 +112,19 @@ _pkgname()
                         done))
             fi
         else
-        COMPREPLY=( $(compgen -W "$(\
-                    for pd in ${portdir} ; do \
-                        if [[ -d ${pd}/metadata/cache ]] ; then
-                            builtin cd ${pd}/metadata/cache; \
-                            compgen -G "$cur*" -S / ; \
-                        fi ; \
-                    done)" -- $cur) )
+            # 1. Collect all the categories among ${portdir}
+            ww=$(\
+                for pd in ${portdir}; do
+                    builtin cd ${pd};
+                    compgen -X "!*-*" -S '/' -G "$cur*";
+                done)
+
+            # 2. Now ugly hack to delete duplicate categories
+            local w
+            for x in ${ww} ; do w="${x}\n${w}"; done
+            words=$(echo -e ${w} | sort -u)
+
+            COMPREPLY=($(compgen -W "$words" -- $cur))
                 if [[ ${#COMPREPLY[@]} == 1 ]]; then
             COMPREPLY=($(compgen -W "$(\
                     for pd in ${portdir} ; do \
