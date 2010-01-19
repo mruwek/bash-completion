@@ -116,7 +116,7 @@ _pkgname()
             ww=$(\
                 for pd in ${portdir}; do
                     builtin cd ${pd};
-                    compgen -X "!*-*" -S '/' -G "$cur*";
+                    compgen -X "!@(*-*|virtual)" -S '/' -G "$cur*";
                 done)
 
             # 2. Now ugly hack to delete duplicate categories
