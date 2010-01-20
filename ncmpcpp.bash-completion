@@ -4,10 +4,10 @@
 {
     local cur prev cmds opts
 
-	cur="$2"
+    cur="$2"
     prev="$3"
     cmds=`ncmpcpp --help 2>&1 | awk '/^  [a-z]+ /{print $1}'`;
-    opts="`ncmpcpp --help 2>&1 | awk '/^  -.+,/{print $1 "\n" $2}' | sed -e 's/,//;$a--now-playing'`"
+    opts=`_parse_help ncmpcpp`
 
     case "$prev" in
         ncmpcpp)
