@@ -113,16 +113,16 @@ _pkgname()
             fi
         else
             # 1. Collect all the categories among ${portdir}
-            ww=$(\
+            local ww=$(\
                 for pd in ${portdir}; do
                     builtin cd ${pd};
                     compgen -X "!@(*-*|virtual)" -S '/' -G "$cur*";
                 done)
 
             # 2. Now ugly hack to delete duplicate categories
-            local w
+            local w x
             for x in ${ww} ; do w="${x}\n${w}"; done
-            words=$(echo -e ${w} | sort -u)
+            local words=$(echo -e ${w} | sort -u)
 
             COMPREPLY=($(compgen -W "$words" -- $cur))
                 if [[ ${#COMPREPLY[@]} == 1 ]]; then
