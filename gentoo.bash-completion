@@ -93,11 +93,14 @@ _pkgname()
         if [[ $cur == */* ]]; then
             # Once the category has been completed, it's safe to use ${portdir}
             # to continue completion.
+                local ww=$(\
+                    for pd in ${portdir} ; do
+                        builtin cd ${pd};
+                        compgen -W "$(compgen -G "${cur}*")" -- "${cur}" ;
+                    done)
                 COMPREPLY=($(\
-                    for pd in ${portdir} ; do \
-                        builtin cd ${pd}; \
-                        compgen -W "$(compgen -G "${cur}*")" -- "${cur}" ; \
-                    done))
+                    for x in ${ww}; do echo $x; done|sort -u
+                        ))
             # When we've completed most of the name, also display the version for
             # possible completion.
             if [[ ${#COMPREPLY[@]} -le 1 || ${cur:${#cur}-1:1} == "-" ]] && 
