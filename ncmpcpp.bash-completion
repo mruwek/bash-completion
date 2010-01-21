@@ -1,4 +1,7 @@
-# put this in your bashrc for bash tab completion with ncmpcpp
+# Installation:
+# - If you have system bash completion, place this in /etc/bash_completion.d or
+#   source it from $HOME/.bash_completion
+# - If you don't have system bash completion, source this from your .bashrc
 
  _ncmpcpp ()
 {
