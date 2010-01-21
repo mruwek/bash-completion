@@ -19,17 +19,17 @@
                     COMPREPLY=($(compgen -W '$cmds' -- "$cur"))
                     ;;
             esac
-        ;;
+            ;;
         --port|-p|--host|-h)
-        COMPREPLY=()
-        ;;
+            COMPREPLY=()
+            ;;
         --help|-?|--version|-v|--now-playing)
-        return
-        ;;
+            return
+            ;;
         next|pause|play|prev|stop|toggle|volume)
-        opts="`echo $opts | sed -e 's/--port//;s/--host//;s/-p//;s/-h//'`"
-        COMPREPLY=($(compgen -W '$opts' -- "$cur"))
-        ;;
+            opts="`echo $opts | sed -e 's/--port//;s/--host//;s/-p//;s/-h//'`"
+            COMPREPLY=($(compgen -W '$opts' -- "$cur"))
+            ;;
         *)
             case "$cur" in
                 -*)
@@ -39,7 +39,7 @@
                     COMPREPLY=($(compgen -W '$cmds' -- "$cur"))
                     ;;
             esac
-        ;;
+            ;;
     esac
 }
 complete -F _ncmpcpp ncmpcpp
