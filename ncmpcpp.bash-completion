@@ -11,7 +11,14 @@
 
     case "$prev" in
         ncmpcpp)
-        COMPREPLY=($(compgen -W '$opts $cmds' -- "$cur"))
+            case "$cur" in
+                -*)
+                    COMPREPLY=($(compgen -W '$opts' -- "$cur"))
+                    ;;
+                *)
+                    COMPREPLY=($(compgen -W '$cmds' -- "$cur"))
+                    ;;
+            esac
         ;;
         --port|-p|--host|-h)
         COMPREPLY=()
@@ -24,7 +31,14 @@
         COMPREPLY=($(compgen -W '$opts' -- "$cur"))
         ;;
         *)
-        COMPREPLY=($(compgen -W '$opts $cmds' -- "$cur"))
+            case "$cur" in
+                -*)
+                    COMPREPLY=($(compgen -W '$opts' -- "$cur"))
+                    ;;
+                *)
+                    COMPREPLY=($(compgen -W '$cmds' -- "$cur"))
+                    ;;
+            esac
         ;;
     esac
 }
